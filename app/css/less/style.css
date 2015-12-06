@@ -23,6 +23,7 @@ body {
 }
 .container.preview {
   transition: transform 1s ease;
+  transform: rotateY(0deg);
 }
 .container.preview.hide {
   transform: rotateY(-90deg);
@@ -31,8 +32,12 @@ body {
   display: block;
   transform: rotateY(0deg);
 }
+.container.preview .text-ct {
+  padding-bottom: 0px;
+}
 .container.edit {
   transition: transform 1s ease;
+  transform: rotateY(0deg);
 }
 .container.edit.hide {
   transform: rotateY(90deg);
@@ -48,7 +53,7 @@ body {
   line-height: 0;
 }
 .container .pic-ct img {
-  max-width: 100%;
+  width: 100%;
 }
 .container .pic-ct .mask {
   padding: 130px 0px;
@@ -76,6 +81,7 @@ body {
 }
 .container .text-ct .acts {
   text-align: center;
+  overflow: auto;
 }
 .container .text-ct .acts .act {
   display: block;
@@ -92,6 +98,12 @@ body {
   font-size: 18px;
   color: black;
 }
+.container .text-ct .user {
+  text-align: right;
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  color: gray;
+}
 .container .text-ct .like {
   color: red;
   position: absolute;
@@ -101,7 +113,7 @@ body {
   cursor: pointer;
 }
 .container .text-ct pre {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   overflow: hidden;
   word-break: break-word;
 }
@@ -144,6 +156,55 @@ body {
 .container .textarea .submit i {
   line-height: 50px;
   font-size: 30px;
+}
+.container .subCtrl {
+  overflow: auto;
+  padding: 20px 5px 10px;
+}
+.container .subCtrl .sub {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  line-height: 40px;
+  font-size: 12px;
+}
+.container .subCtrl .sub.ret {
+  float: left;
+  background-color: #FF6B4A;
+  box-shadow: 0px 0px 2px 1px #DC632A;
+}
+.container .subCtrl .sub.ret:active {
+  box-shadow: 0px 0px 5px 2px #DC632A;
+}
+.container .subCtrl .sub.go {
+  float: right;
+  background-color: #1CCCDE;
+  box-shadow: 0px 0px 2px 1px #9ABCC5;
+}
+.container .subCtrl .sub.go:active {
+  box-shadow: 0px 0px 5px 2px #9ABCC5;
+}
+.submitCtrl {
+  overflow: hidden;
+  border-radius: 3px;
+}
+.submitCtrl .sub {
+  box-sizing: border-box;
+  width: 50%;
+  padding: 10px;
+  background-color: white;
+  float: left;
+  text-align: center;
+  font-size: 12px;
+  color: white;
+}
+.submitCtrl .sub.ret {
+  background-color: #1CCCDE;
+}
+.submitCtrl .sub.go {
+  background-color: #1CCCDE;
 }
 @keyframes circle {
   0% {
