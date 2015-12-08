@@ -1,6 +1,10 @@
 var weitherAPI = 'http://api.openweathermap.org/data/2.5/weather?appid=2de143494c0b295cca9337e1e96b00e0&lang=zh&callback=?&q='
 var transitionend = "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd";
 
+var API = {
+    get: 'http://5.vgee.sinaapp.com/s1/jsonp.php?callback=?',
+    post: 'http://5.vgee.sinaapp.com/s1/jsonpost.php?callback=?'
+}
 
 $.fn.toShow = function() {
     return $(this).removeClass('hide').addClass('show');
@@ -16,7 +20,7 @@ var loadUserMsg = function(cb) {
 
     data.text = $('.edit #msg').val();
     data.location = ipLoc.city || ipLoc.province || '北京';
-    data.time = date.getMonth() + '/' + date.getDate();
+    data.time = date.getMonth() + 1 + '/' + date.getDate();
     var currentWeither = weitherAPI + data.location;
 
     $.getJSON(currentWeither).success(function(weither) {
@@ -37,6 +41,26 @@ var loadUserMsg = function(cb) {
         cb(data);
 
     });
+}
+
+var userData;
+
+var postData = function() {
+    var wall_author = userData.user,
+        wall_message = userData.text,
+        wall_weither = userData.weither,
+        wall_city = userData.location;
+    var param = '&wall_author='+wall_author+'&wall_message='
+                +wall_message+'&wall_weither='+wall_weither
+                +'&wall_city='+wall_city;
+    console.log(param);
+    $.getJSON(API.post + param).success(function(data) {
+        if(data.success) {
+            window.location.href="list.html"
+        }else {
+            alert(data);
+        }
+    })
 }
 
 var init = function() {
@@ -67,7 +91,7 @@ var init = function() {
         loadUserMsg(function(data) {
 
             data.user = user;
-            console.log(data);
+            userData = data;
             $(this).removeClass('circle');
             $('.edit').toHide().one(transitionend, function(){
                 $(this).unbind(transitionend).hide();
@@ -75,11 +99,10 @@ var init = function() {
                     .find('#temp').text(data.weither).end()
                     .find('#time').text(data.time).end()
                     .find('#loc').text(data.location).end()
-                    .find('.user span').text(data.user);
-
-                setTimeout(function(){
-                    $('.preview').toShow(); 
-                });
+                    .find('.user span').text(data.user).end();
+                    setTimeout(function(){
+                        $('.preview').toShow(); 
+                    })
 
             });
 
@@ -95,6 +118,10 @@ var init = function() {
             })
         })
     })
+
+    $('.go').click(function() {
+        postData();
+    })
 }
 
 $(function() {
@@ -104,22 +131,9 @@ $(function() {
     init();
 })
 
-// var test = function() {
-//     var arr = [];
-//     var str = 'http://openweathermap.org/img/w/';
-//     var html = '';
-//     for(i=1;i<999;i++) {
-//         var num = '';
-//         var ss = '';
-//         if(i<10) {
-//             num = '0' + i;
-//         } else {
-//             num = '' + i;
-//         }
-//         ss = str + num + 'd.png';
-//         html += '<img src="' + ss + '">\n';
-//     }
-//     console.log(html);
-//     $('#test').html(html);
-// }
-// test();
+var test = function() {
+    var arr = [];
+    
+    var str = 'http://openweathermap.org/img/w/50d.png';
+
+}
