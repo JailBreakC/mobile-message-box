@@ -6,6 +6,18 @@ var API = {
     post: 'http://5.vgee.sinaapp.com/s1/jsonpost.php?callback=?'
 }
 
+var icons = {
+    '01': '&#xe604;',
+    '02': '&#xe603;',
+    '03': '&#xe606;',
+    '04': '&#xe601;',
+    '09': '&#xe600;',
+    '10': '&#xe607;',
+    '11': '&#xe602;',
+    '13': '&#xe608;',
+    '50': '&#xe605;'
+}
+
 $.fn.toShow = function() {
     return $(this).removeClass('hide').addClass('show');
 }
@@ -31,10 +43,11 @@ var loadUserMsg = function(cb) {
         }
         data.temp = (weither.main.temp - 273.15).toFixed(0);
         data.weither = weither.weather[0].description;
+        data.w_icon = weither.weather[0].icon.slice(0,2);
         
     }).fail(function() {
 
-        data.temp = 'null'
+        data.temp = '未知'
 
     }).done(function() {
 
@@ -50,9 +63,12 @@ var postData = function() {
         wall_message = userData.text,
         wall_weither = userData.weither,
         wall_city = userData.location;
-    var param = '&wall_author='+wall_author+'&wall_message='
-                +wall_message+'&wall_weither='+wall_weither
-                +'&wall_city='+wall_city;
+        wall_w_icon = userData.w_icon;
+    var param =  '&wall_author='+wall_author
+                +'&wall_message='+wall_message
+                +'&wall_weither='+wall_weither
+                +'&wall_city='+wall_city
+                +'&wall_w_icon='+wall_w_icon;
     console.log(param);
     $.getJSON(API.post + param).success(function(data) {
         if(data.success) {
@@ -92,10 +108,12 @@ var init = function() {
 
             data.user = user;
             userData = data;
+            console.log(data);
             $(this).removeClass('circle');
             $('.edit').toHide().one(transitionend, function(){
                 $(this).unbind(transitionend).hide();
                 $('.preview').show().find('#prepre').text(data.text).end()
+                    .find('#i-temp').html(icons[data.w_icon]).end()
                     .find('#temp').text(data.weither).end()
                     .find('#time').text(data.time).end()
                     .find('#loc').text(data.location).end()
