@@ -32,10 +32,11 @@ var getData = function() {
             time.shift();
             time = time.join('/');
             var icon = icons[msg.wall_w_icon] || '&#xe604;'
+            var noImg = msg.wall_img ? '': 'no-img';
             var htmlStr = [
-            '<div class="container">',
+            '<div class="container '+noImg+'">',
                 '<div class="pic-ct">',
-                    '<img src="http://pic.sc.chinaz.com/files/pic/pic9/201402/apic229.jpg" alt="">',
+                    '<img src="'+msg.wall_img+'" alt="">',
                 '</div>',
                 '<div class="text-ct">',
                     '<pre>'+msg.wall_message+'</pre>',

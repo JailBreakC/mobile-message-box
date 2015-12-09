@@ -46,21 +46,37 @@ body {
             display: block;
             transform: rotateY(0deg);
         }
+        .pic-ct {
+            height: 50vh;
+        }
     }
     background-color: transparent;
     overflow: hidden;
     margin-bottom: 20px;
+    &.no-img {
+        img {
+            display: none;
+        }
+        .text-ct {
+            border-radius: 3px;
+        }
+    }
     .pic-ct {
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
         overflow: hidden;
         line-height: 0;
+        position: relative;
+        background: white;
+        text-align: center;
+
         img {
             width: 100%;
         }
         .mask {
-            padding: 130px 0px; 
             background-color: grey;
+            padding-top: 50%;
+            height: 100%;
             &:active {
                 background-color: #696969;
             }
@@ -68,6 +84,7 @@ body {
                 display: block;
                 margin: auto;
                 text-align: center;
+                margin-top: -17px;
                 .iconfont {
                     font-size: 35px;
                     color: white
@@ -132,7 +149,7 @@ body {
         textarea {
             box-sizing: border-box;
             width: 100%;
-            min-height: 150px;
+            min-height: 30vh;
             padding: 20px;
             border: none;
             resize: none;

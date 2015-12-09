@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>Message box</title>
+    <title>vgee.cn 留言板</title>
     <link rel="stylesheet" href="/build/css/less/style.css">
     <script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 </head>
 <body>
+        
     <div class="container edit">
         <div class="pic-ct">
             <div class="mask">
@@ -24,7 +25,7 @@
 
     <div class="container preview hide" style="display: none">
         <div class="pic-ct">
-            <img src="http://pic.sc.chinaz.com/files/pic/pic9/201402/apic229.jpg" alt="">
+            <img id="picture" alt="">
         </div>
         <div class="text-ct">
             <!-- <i class="iconfont like">&#xe60d;</i>  -->  
@@ -54,7 +55,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>  
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/js-cookie/js-cookie-2.0.4/src/js.cookie.js"></script>
     <script src="bower_components/textarea-autosize/dist/jquery.textarea_autosize.min.js"></script>

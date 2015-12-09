@@ -18,6 +18,8 @@ var icons = {
     '50': '&#xe605;'
 }
 
+var PICS = 20;
+
 $.fn.toShow = function() {
     return $(this).removeClass('hide').addClass('show');
 }
@@ -44,6 +46,7 @@ var loadUserMsg = function(cb) {
         data.temp = (weither.main.temp - 273.15).toFixed(0);
         data.weither = weither.weather[0].description;
         data.w_icon = weither.weather[0].icon.slice(0,2);
+        data.img = 'http://7xp0x5.com1.z0.glb.clouddn.com/photo'+Math.ceil(PICS * Math.random())+'.png'
         
     }).fail(function() {
 
@@ -64,11 +67,13 @@ var postData = function() {
         wall_weither = userData.weither,
         wall_city = userData.location;
         wall_w_icon = userData.w_icon;
+        wall_img = userData.img;
     var param =  '&wall_author='+wall_author
                 +'&wall_message='+wall_message
                 +'&wall_weither='+wall_weither
                 +'&wall_city='+wall_city
-                +'&wall_w_icon='+wall_w_icon;
+                +'&wall_w_icon='+wall_w_icon
+                +'&wall_img='+wall_img;
     console.log(param);
     $.getJSON(API.post + param).success(function(data) {
         if(data.success) {
@@ -113,6 +118,7 @@ var init = function() {
             $('.edit').toHide().one(transitionend, function(){
                 $(this).unbind(transitionend).hide();
                 $('.preview').show().find('#prepre').text(data.text).end()
+                    .find('#picture').attr('src', data.img).end()
                     .find('#i-temp').html(icons[data.w_icon]).end()
                     .find('#temp').text(data.weither).end()
                     .find('#time').text(data.time).end()
@@ -139,6 +145,10 @@ var init = function() {
 
     $('.go').click(function() {
         postData();
+    })
+
+    $('.mask').click(function() {
+        alert('程序员大爷正在开发图片上传功能呢，敬请期待')
     })
 }
 
