@@ -63,7 +63,7 @@ var userData;
 
 var postData = function() {
     var wall_author = userData.user,
-        wall_message = userData.text,
+        wall_message = userData.text.replace(/\n/g, '/_rt/'),
         wall_weither = userData.weither,
         wall_city = userData.location;
         wall_w_icon = userData.w_icon;
@@ -149,6 +149,11 @@ var init = function() {
 
     $('.mask').click(function() {
         alert('程序员大爷正在开发图片上传功能呢，敬请期待')
+    })
+
+    $('#picture').click(function() {
+        userData.img = 'http://7xp0x5.com1.z0.glb.clouddn.com/photo'+Math.ceil(PICS * Math.random())+'.png'
+        $(this).attr('src', userData.img);
     })
 }
 
